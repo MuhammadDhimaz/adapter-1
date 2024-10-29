@@ -1,0 +1,27 @@
+app:
+  security:
+    authLoginConfig: "./resources/configs/jaas.conf"
+    krb5Config: "./resources/configs/krb5.conf"
+    secret-key: 'GyCoBiftznPCS2ggswLoT9uZ4NbhIpTDpbxmk8BZoCU='
+  datasource:
+    impala:
+      driver-class-name: com.cloudera.impala.jdbc.Driver
+      jdbc-url: jdbc:impala://cldr-edge.bpjsketenagakerjaan.go.id:21050/dwh_dev;user=jsreport-dev@BPJSTK.ID;AuthMech=1;KrbRealm=BPJSTK.ID;KrbHostFQDN=cldr-edge.bpjsketenagakerjaan.go.id;KrbServiceName=impala;
+      max-lifetime: 60000 # 1 minute
+      minimum-idle: 5
+      maximum-pool-size: 10
+      idle-timeout: 50000 # 50 seconds
+      connection-timeout: 30000 # 30 seconds
+      validation-timeout: 5000 # 5 seconds
+    h2:
+      jdbc-url: ${h2JdbcUrl}
+      mv-store: false
+      driver-class-name: org.h2.Driver
+      username: ${h2Username}
+      password: ${h2Password}
+    jsreport:
+      base-url: ${jsreportUrl}
+      username: ${jsreportUsername}
+      password: ${jsreportPassword}
+  jpa:
+    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
